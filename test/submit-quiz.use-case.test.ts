@@ -1,5 +1,5 @@
 import { it, expect, describe, beforeEach } from "bun:test";
-import { QuizRepositoryInMemory } from "../src/application/infra/quiz.repository.in-memory";
+import { QuizRepositoryInMemory } from "../src/infra/quiz.repository.in-memory";
 import { SubmitQuizUseCase } from "../src/application/usecase/submit-quiz.use-case";
 import { Quiz } from "../src/domain/entity/quiz.entity";
 import { questions } from "./mock/questions";
@@ -11,7 +11,7 @@ let submitQuizUseCase: SubmitQuizUseCase;
 describe("SubmitQuizUseCase", () => {
     beforeEach(() => {
         quizRepository = new QuizRepositoryInMemory();
-		submitQuizUseCase = new SubmitQuizUseCase(quizRepository);
+        submitQuizUseCase = new SubmitQuizUseCase(quizRepository);
     });
 
     it("Um usuário deve submeter um quiz respondido e a nota deve ser calculada", async () => {
