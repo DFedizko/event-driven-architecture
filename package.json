@@ -1,0 +1,16 @@
+{
+  "name": "event-driven-architecture",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
