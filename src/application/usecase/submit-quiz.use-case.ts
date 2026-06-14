@@ -1,5 +1,4 @@
 import { QuizSubmittedEvent } from "@/domain/event/quiz-submitted.event";
-import type { IMailerService } from "../service/mailer.service";
 import type { IMediator } from "@/infra/mediator/mediator";
 
 export class SubmitQuizUseCase {
