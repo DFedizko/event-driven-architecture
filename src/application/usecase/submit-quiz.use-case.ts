@@ -1,16 +1,14 @@
-import type { IQuizRepository } from "../../domain/repository/quiz.repository";
-import { CalculateQuizGradeService } from "../../domain/service/calculate-quiz-grade.service";
+import { QuizSubmittedEvent } from "@/domain/event/quiz-submitted.event";
+import type { IMailerService } from "../service/mailer.service";
+import type { IMediator } from "@/infra/mediator/mediator";
 
 export class SubmitQuizUseCase {
-    constructor(private readonly quizRepository: IQuizRepository) {}
+    constructor(private readonly mediator: IMediator) {}
 
-    public async execute(input: Input): Promise<Output> {
-        const quiz = await this.quizRepository.findById(input.quizId);
-        const calculateQuizGradeService = new CalculateQuizGradeService(quiz.questions, input.answers);
-        const grade = calculateQuizGradeService.calculate();
-        return { grade };
+    public async execute(input: Input): Promise<void> {
+        const event = new QuizSubmittedEvent(input.quizId, input.email, input.name, input.answers);
+        this.mediator.publish(event);
     }
 }
 
 type Input = { name: string; email: string; quizId: number; answers: Record<string, string> };
-type Output = { grade: number };
